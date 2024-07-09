@@ -1,0 +1,67 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure the App takes up the full height */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+}
+
+/* Main content should take up remaining space */
+main {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+
+
+header, footer {
+  background-color: turquoise;
+  color: white;
+  padding: 30px;
+  height: 50px;
+}
+
+header nav ul, footer nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+header nav ul li, footer nav ul li {
+  display: inline;
+  margin: 0 10px;
+  justify-content: center;
+}
+
+header nav ul li a, footer nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.book-card {
+  border: 1px solid #000;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  width: 20%;
+}
+
+.book-card:hover{
+  border: 1px solid #ccc;
+  box-shadow: 1px 2px 3px 3px turquoise;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
