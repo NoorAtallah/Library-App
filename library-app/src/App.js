@@ -1,8 +1,16 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+
+
 import './App.css'
-import React from 'react';
+import About from './about';
+import Contact from './contact';
+import SignUp from './signup';
+import Navbar from './navbar';
 import Header from './header';
 import Main from './main';
 import Footer from './footer';
+
 
 const App = () => {
   const initialState = {
@@ -72,12 +80,18 @@ const App = () => {
   };
 
   return (
+    <Router>
     <div className="App">
-      <Header />
-      <Main books={initialState.books} />
+      <Navbar />
+      <Routes>
+      <Route path="/" element={<Main books={initialState.books} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
       <Footer />
-      
     </div>
+  </Router>
   );
 };
 
