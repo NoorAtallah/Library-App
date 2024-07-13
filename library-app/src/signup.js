@@ -1,54 +1,53 @@
 import React, { useState } from 'react';
 
-const SignUp = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [registered, setRegistered] = useState(localStorage.getItem('user') ? true : false);
+const Signup = () => {
+  const [user, setUser] = useState({ username: '', email: '', password: '' });
+  const [isRegistered, setIsRegistered] = useState(localStorage.getItem('user') !== null);
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    localStorage.setItem('user', JSON.stringify({ username, password }));
-    setRegistered(true);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUser(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    setRegistered(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem('user', JSON.stringify(user));
+    setIsRegistered(true);
   };
 
   return (
     <div>
-      {registered ? (
-        <div>
-          <h1>Welcome, {JSON.parse(localStorage.getItem('user')).username}!</h1>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      ) : (
-        <form onSubmit={handleSignUp}>
-          <h1>Sign Up</h1>
-          <div>
-            <label>Username: </label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Password: </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+      <h2>Sign Up</h2>
+      {!isRegistered ? (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={user.username}
+            onChange={handleInputChange}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={user.email}
+            onChange={handleInputChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={user.password}
+            onChange={handleInputChange}
+          />
           <button type="submit">Sign Up</button>
         </form>
+      ) : (
+        <p>Welcome, {JSON.parse(localStorage.getItem('user')).username}!</p>
       )}
     </div>
   );
 };
 
-export default SignUp;
+export default Signup;
